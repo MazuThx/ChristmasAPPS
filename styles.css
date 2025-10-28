@@ -1,221 +1,192 @@
-/* ============================================================
-   THÈME NOËL — EASYVISTA PORTAL
-   Activé automatiquement du 1er décembre au 6 janvier
-   ============================================================ */
+/* styles.css */
+/* ========== Modern Reset ========== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html:focus-within { scroll-behavior: smooth; }
+html, body { height: 100%; }
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd { margin: 0; }
+img, picture, svg, video, canvas { display: block; max-inline-size: 100%; block-size: auto; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+:focus { outline: none; }
+:focus-visible { outline: 3px solid var(--focus-ring, #38b2ac); outline-offset: 3px; }
 
-:root[data-theme="noel"] {
-  /* Palette Noël */
-  --color-accent: #2E7D32;        /* Vert sapin (remplace teal) */
-  --color-accent-2: #F9A825;      /* Doré (remplace pink) */
-  --color-badge: #C62828;         /* Rouge Noël profond */
-  --color-info: #0288D1;          /* Bleu glacier */
-  
-  /* Arrière-plans */
-  --color-bg: #F7FAFC;            /* Neige très claire */
-  --color-surface: rgba(255, 255, 255, 0.95);
-  
-  /* Chips & variations */
-  --chip-incident: #FFCDD2;       /* Rouge clair */
-  --chip-tips: #FFF8E1;           /* Doré pâle */
-  --chip-success: #E8F5E9;        /* Vert clair */
-  --chip-info: #E3F2FD;           /* Bleu clair */
-  
-  /* Focus & ombres */
-  --focus-ring: var(--color-accent-2);
-  --shadow-festive: 0 8px 24px rgba(16, 24, 40, 0.08), 0 2px 8px rgba(249, 168, 37, 0.06);
+/* ========== Tokens (Default Theme) ========== */
+:root{
+  --color-bg: #e9f6f4;
+  --color-accent: #38b2ac;
+  --color-accent-2: #f6a5c0;
+  --color-text: #0f172a;
+  --color-muted: #475569;
+  --color-surface: rgba(255,255,255,0.9);
+  --radius-xl: 16px;
+  --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+
+  --surface-blur: 10px;
+  --appbar-h: 64px;
+
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  --fs-hero: clamp(2rem, 5vw + 1rem, 4.5rem);
+  --fs-h3: clamp(1.05rem, 1.2vw + .8rem, 1.25rem);
+  --fs-body: clamp(0.95rem, .3vw + .8rem, 1rem);
+
+  /* Misc */
+  --ring: color-mix(in oklab, var(--color-accent) 80%, white 20%);
+  --ring-strong: color-mix(in oklab, var(--color-accent) 90%, black 10%);
+  --glass: color-mix(in oklab, white 85%, transparent);
 }
 
-/* ============================================================
-   FOND DE PAGE AVEC OVERLAY NEIGE
-   ============================================================ */
-:root[data-theme="noel"] body {
-  background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(2, 136, 209, 0.06), transparent 60%),
-    radial-gradient(900px 500px at 10% 110%, rgba(46, 125, 50, 0.05), transparent 60%),
-    var(--color-bg);
+/* ========== Base ========== */
+html, body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); }
+.container { inline-size: min(1280px, 100% - 48px); margin-inline: auto; }
+@media (max-width: 480px){ .container{ inline-size: min(100%, 100% - 24px); } }
+
+.sr-only, .visually-hidden { position: absolute !important; inline-size: 1px; block-size: 1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; clip-path: inset(50%); }
+.skip-link {
+  position: absolute; inset-block-start: -40px; inset-inline-start: 16px; background: #000; color: #fff; padding: .5rem .75rem; border-radius: 8px; z-index: 9999;
+}
+.skip-link:focus { inset-block-start: 8px; }
+
+/* ========== App Bar ========== */
+.appbar {
+  position: fixed; inset-block-start: 0; inset-inline: 0; block-size: var(--appbar-h); z-index: 1000;
+  background: color-mix(in oklab, var(--color-surface) 80%, transparent);
+  -webkit-backdrop-filter: saturate(140%) blur(var(--surface-blur));
+  backdrop-filter: saturate(140%) blur(var(--surface-blur));
+  border-bottom: 1px solid color-mix(in oklab, var(--color-text) 10%, transparent);
+}
+@supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  .appbar { background: rgba(255,255,255,0.92); }
+}
+.appbar__inner {
+  display: grid; grid-template-columns: 40px 1fr auto; align-items: center; block-size: 100%;
+  gap: 12px;
+}
+.logo {
+  justify-self: center; letter-spacing: .12em; font-weight: 800; font-size: 1rem;
+}
+.appbar__actions { display: inline-flex; gap: 8px; align-items: center; }
+
+.icon-btn {
+  display: inline-grid; place-items: center; inline-size: 40px; block-size: 40px;
+  border-radius: 999px; background: transparent; border: 1px solid color-mix(in oklab, var(--color-text) 8%, transparent);
+  transition: transform .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.icon-btn:hover { background: color-mix(in oklab, var(--color-accent) 10%, white 90%); }
+.icon-btn:active { transform: translateY(1px) scale(.98); }
+.icon-btn .icon { pointer-events: none; }
+.icon-btn--badge { position: relative; }
+.icon-btn--badge::after {
+  content: ""; position: absolute; inset-inline-end: 5px; inset-block-start: 5px;
+  inline-size: 8px; block-size: 8px; background: #e11d48; border-radius: 999px; box-shadow: 0 0 0 2px white;
+}
+.avatar {
+  inline-size: 36px; block-size: 36px; border-radius: 999px; display: inline-grid; place-items: center;
+  background: color-mix(in oklab, var(--color-accent-2) 40%, white 60%);
+  font-weight: 700; border: 1px solid color-mix(in oklab, var(--color-text) 10%, transparent);
 }
 
-:root[data-theme="noel"] .hero {
-  /* TODO: Remplacer par background-portal.jpg */
-  background-image: url('/assets/noel/background-portal.jpg');
+/* ========== Hero ========== */
+.hero {
+  position: relative; padding-block-start: var(--appbar-h); min-block-size: calc(100svh - var(--appbar-h));
+  display: grid; align-content: start;
+}
+.hero__media {
+  position: absolute; inset: 0; z-index: -1; background: center/cover no-repeat;
+  background-image: url('https://images.unsplash.com/photo-1521185496955-15097b20c5fe?q=80&w=1920&auto=format&fit=crop'); /* TODO: remplacer par l’URL corporate */
+}
+.hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, color-mix(in oklab, #f6a5c0 65%, transparent) 0%, color-mix(in oklab, #38b2ac 65%, transparent) 100%);
+  opacity: .2;
+}
+.hero__content { padding-block: 72px 32px; }
+.greet {
+  color: #fff; font-weight: 800; font-size: var(--fs-hero); line-height: 1.05; text-shadow: 0 2px 30px rgba(0,0,0,.35);
 }
 
-/* Overlay flocons (optionnel) */
-:root[data-theme="noel"] .hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('/assets/noel/snowflakes.png') repeat;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 5;
+/* Search */
+.search {
+  margin-block-start: 24px; inline-size: min(760px, 100%); display: grid; grid-template-columns: 1fr auto; align-items: center;
+  background: var(--glass); border-radius: 999px; padding: 8px; border: 1px solid color-mix(in oklab, var(--color-text) 10%, transparent);
+  box-shadow: var(--shadow-lg);
 }
-
-/* ============================================================
-   APPBAR — AVATAR AVEC BONNET
-   ============================================================ */
-:root[data-theme="noel"] .avatar {
-  background: var(--color-badge);
+.search__input {
+  inline-size: 100%; border: none; background: transparent; padding: 12px 16px; border-radius: 999px; color: var(--color-text);
 }
-
-:root[data-theme="noel"] .avatar::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  right: -4px;
-  inline-size: 20px;
-  block-size: 20px;
-  background: url('/assets/noel/icon-santa-hat.svg') no-repeat center / contain;
-  pointer-events: none;
+.search__input::placeholder { color: color-mix(in oklab, var(--color-text) 40%, white 60%); }
+.search__button {
+  inline-size: 44px; block-size: 44px; border-radius: 999px; border: none; background: var(--color-accent);
+  display: grid; place-items: center; color: #fff; cursor: pointer; transition: transform .2s ease, background-color .2s ease;
 }
+.search__button:hover { background: color-mix(in oklab, var(--color-accent) 85%, black 15%); }
+.search__button:active { transform: translateY(1px) scale(.98); }
 
-/* ============================================================
-   BOUTONS & CTAs
-   ============================================================ */
-:root[data-theme="noel"] .search__button {
-  background: var(--color-accent);
+/* Cards row */
+.cards {
+  margin-block: 32px 0; display: grid; gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  transform: translateY(24px);
 }
-
-:root[data-theme="noel"] .search__button:hover {
-  background: #1B5E20;
+.card {
+  background: var(--color-surface); border-radius: var(--radius-xl); padding: 20px 20px 12px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid color-mix(in oklab, var(--color-text) 10%, transparent);
+  display: grid; grid-template-rows: auto 1fr auto; gap: 12px;
+  min-block-size: 180px;
 }
-
-:root[data-theme="noel"] .card__cta {
+.card__icon { inline-size: 48px; block-size: 48px; display: grid; place-items: center; color: var(--color-accent); }
+.card__text h3 { font-size: var(--fs-h3); line-height: 1.3; }
+.card__text .muted { margin-block-start: 6px; color: var(--color-muted); font-size: var(--fs-body); }
+.card__cta {
+  align-self: end; justify-self: start; font-weight: 700; letter-spacing: .03em; text-transform: uppercase;
+  border-bottom: 2px solid transparent; padding-block-end: 2px; transition: color .2s ease, border-color .2s ease;
   color: var(--color-accent);
 }
+.card__cta:hover { border-color: currentColor; }
 
-:root[data-theme="noel"] .card__cta::after {
-  background: var(--color-accent);
+/* Alert Bar */
+.alert {
+  margin-block-start: 36px; background: #0f172a; color: #fff;
+}
+.alert__inner { display: grid; grid-template-columns: 20px 1fr; gap: 12px; padding-block: 14px; align-items: center; }
+.alert__icon { color: #fbbf24; }
+
+/* FAB */
+.fab {
+  position: fixed; inset-block-end: clamp(12px, 2.5vh, 24px); inset-inline-end: clamp(12px, 2.5vw, 24px);
+  inline-size: 56px; block-size: 56px; border-radius: 999px; border: none; background: var(--color-accent);
+  color: #fff; box-shadow: 0 10px 25px rgba(0,0,0,.2); display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  cursor: pointer; transition: box-shadow .2s ease, transform .2s ease, background-color .2s ease;
+  padding-inline: 16px;
+}
+.fab__label { display: none; font-weight: 700; }
+.fab:hover { background: color-mix(in oklab, var(--color-accent) 85%, black 15%); box-shadow: 0 12px 28px rgba(0,0,0,.25); transform: translateY(-1px); }
+@media (hover:hover) and (pointer:fine){
+  .fab:hover .fab__label { display: inline; }
 }
 
-:root[data-theme="noel"] .card__cta:hover {
-  color: #1B5E20;
+/* ========== Responsive ========== */
+@media (max-width: 1280px){ .cards{ gap: 16px; } }
+@media (max-width: 992px){
+  .cards{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .hero__content { padding-block-start: 56px; }
+}
+@media (max-width: 768px){
+  .greet{ text-align: left; }
+  .search{ inline-size: 100%; }
+}
+@media (max-width: 480px){
+  .cards{ grid-template-columns: 1fr; }
+  .greet{ font-size: clamp(2rem, 8vw + .5rem, 2.25rem); }
+  .alert__inner{ grid-template-columns: 20px 1fr; }
+  .fab{ padding-inline: 0; }
+  .fab__label{ display: none !important; }
 }
 
-:root[data-theme="noel"] .fab {
-  background: var(--color-badge);
-  box-shadow: var(--shadow-festive);
-}
-
-:root[data-theme="noel"] .fab:hover {
-  background: #B71C1C;
-}
-
-/* ============================================================
-   ALERTE / BANDEAU INCIDENT
-   ============================================================ */
-:root[data-theme="noel"] .alert {
-  position: relative;
-  background: var(--color-badge);
-  padding-block-end: calc(var(--space-4) + 24px);
-}
-
-:root[data-theme="noel"] .alert::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  block-size: 32px;
-  background: url('/assets/noel/garland-houx.png') repeat-x center / auto 32px;
-  pointer-events: none;
-}
-
-:root[data-theme="noel"] .alert__icon {
-  background: var(--color-accent-2);
-}
-
-/* ============================================================
-   CARTES — ICÔNES THÉMATIQUES
-   ============================================================ */
-:root[data-theme="noel"] .card__icon {
-  color: var(--color-accent);
-}
-
-:root[data-theme="noel"] .card:hover {
-  background: rgba(46, 125, 50, 0.05);
-}
-
-/* ============================================================
-   FOCUS & INTERACTIONS
-   ============================================================ */
-:root[data-theme="noel"] *:focus-visible {
-  outline-color: var(--color-accent-2);
-}
-
-:root[data-theme="noel"] .search__input:focus {
-  box-shadow: 
-    inset 0 2px 4px rgba(0, 0, 0, 0.06), 
-    0 0 0 3px var(--color-accent), 
-    var(--shadow-festive);
-}
-
-/* ============================================================
-   ANIMATIONS OPTIONNELLES (flocons tombants)
-   ============================================================ */
-@media (prefers-reduced-motion: no-preference) {
-  :root[data-theme="noel"] .hero::after {
-    animation: snow-fall 120s linear infinite;
-  }
-  
-  @keyframes snow-fall {
-    from { background-position: 0 0; }
-    to { background-position: 0 1000px; }
-  }
-}
-
-/* ============================================================
-   PANNEAU FLASH INFOS (si ajouté plus tard)
-   ============================================================ */
-:root[data-theme="noel"] .flash {
-  background: var(--chip-info);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-festive);
-  padding: var(--space-6);
-}
-
-:root[data-theme="noel"] .flash__title {
-  color: var(--color-badge);
-  font-weight: 700;
-  margin-block-end: var(--space-4);
-}
-
-:root[data-theme="noel"] .flash__item {
-  display: flex;
-  gap: var(--space-3);
-  align-items: flex-start;
-  padding: var(--space-3);
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  border-inline-start: 4px solid var(--color-info);
-  margin-block-end: var(--space-3);
-}
-
-:root[data-theme="noel"] .flash__item--incident {
-  border-inline-start-color: var(--color-badge);
-  background: var(--chip-incident);
-}
-
-:root[data-theme="noel"] .flash__item--tips {
-  border-inline-start-color: var(--color-accent-2);
-  background: var(--chip-tips);
-}
-
-:root[data-theme="noel"] .flash__item--success {
-  border-inline-start-color: var(--color-accent);
-  background: var(--chip-success);
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 768px) {
-  :root[data-theme="noel"] .alert {
-    padding-block-end: calc(var(--space-3) + 20px);
-  }
-  
-  :root[data-theme="noel"] .alert::after {
-    block-size: 24px;
-    background-size: auto 24px;
-  }
+/* ========== Motion Preferences ========== */
+@media (prefers-reduced-motion: reduce){
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
