@@ -6,6 +6,7 @@
   <meta name="description" content="Portail de services ITSM EasyVista - Gérez vos demandes, incidents et accédez à l'aide.">
   <title>Portail ITSM – Accueil</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme-noel.css">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Aller au contenu principal</a>
@@ -43,7 +44,6 @@
   <main id="main-content">
     <section class="hero">
       <div class="hero__overlay"></div>
-      <!-- TODO: Replace placeholder image with actual architectural background -->
       <div class="hero__content">
         <h2 class="hero__greeting">Bonjour Eddy</h2>
 
@@ -71,8 +71,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </div>
-            <p class="card__text">Vous avez un problème avec vos services, vos matériels ou autre.</p>
-            <a href="/obtenir-aide" class="card__cta">Obtenir de l'aide</a>
+            <p class="card__text">Un lutin a cassé quelque chose ! Déclarez rapidement votre incident.</p>
+            <a href="/obtenir-aide" class="card__cta" aria-label="Déclarer un incident">Déclarer un incident</a>
           </article>
 
           <article class="card">
@@ -81,8 +81,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <p class="card__text">Vous avez besoin d'un nouveau service, nouveau matériel ou autre.</p>
-            <a href="/effectuer-demande" class="card__cta">Effectuer une demande</a>
+            <p class="card__text">Préparez votre liste au Père Noël IT : matériel, services et accès.</p>
+            <a href="/effectuer-demande" class="card__cta" aria-label="Formuler une demande">Formuler une demande</a>
           </article>
 
           <article class="card">
@@ -91,8 +91,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
               </svg>
             </div>
-            <p class="card__text">Vous souhaitez connaître l'avancée de vos demandes et résolutions d'incidents.</p>
-            <a href="/mes-tickets" class="card__cta">Voir mes tickets</a>
+            <p class="card__text">Suivez vos vœux IT en cours de livraison par l'atelier du Père Noël.</p>
+            <a href="/mes-tickets" class="card__cta" aria-label="Suivre mes tickets">Suivre mes tickets</a>
           </article>
         </div>
       </div>
@@ -101,7 +101,7 @@
     <aside class="alert" role="complementary" aria-label="Alerte importante">
       <div class="alert__icon" aria-hidden="true"></div>
       <p class="alert__message">
-        <strong>Alerte :</strong> Formation obligatoire à la sensibilisation à la sécurité et au RGPD – à compléter avant la fin de ce mois
+        <strong>🎅 Alerte :</strong> Formation obligatoire à la sensibilisation à la sécurité et au RGPD – à compléter avant la fin de ce mois
       </p>
     </aside>
   </main>
@@ -112,5 +112,7 @@
     </svg>
     <span class="fab__label">Chat</span>
   </button>
+
+  <script src="theme-noel-activation.js"></script>
 </body>
 </html>
