@@ -1,26 +1,25 @@
-/**
- * Active automatiquement le thème Noël entre le 1er décembre et le 6 janvier
- * À placer juste avant </body> ou en <head> avec defer
- */
-(function() {
-  'use strict';
-  
-  const now = new Date();
-  const year = now.getFullYear();
-  const startDate = new Date(year, 11, 1);   // 1er décembre
-  const endDate = new Date(year + 1, 0, 6);  // 6 janvier année suivante
-  
-  if (now >= startDate && now <= endDate) {
-    document.documentElement.setAttribute('data-theme', 'noel');
-    console.log('🎄 Thème Noël activé jusqu\'au 6 janvier');
-  }
-  
-  // Option : toggle manuel (debug/prévisualisation)
-  // Pour tester : localStorage.setItem('theme-noel', 'true');
-  const forceTheme = localStorage.getItem('theme-noel');
-  if (forceTheme === 'true') {
-    document.documentElement.setAttribute('data-theme', 'noel');
-  } else if (forceTheme === 'false') {
-    document.documentElement.removeAttribute('data-theme');
-  }
+// theme-toggle.js
+(function(){
+  try{
+    var d = new Date();
+    var m = d.getUTCMonth() + 1; // 1-12
+    var day = d.getUTCDate();
+    // Auto-activation window: Dec 1 → Jan 6 (inclusive)
+    var enable = (m === 12 && day >= 1) || (m === 1 && day <= 6);
+
+    // Non-blocking apply after idle/next tick
+    var apply = function(){
+      var root = document.documentElement;
+      if(!root) return;
+      // Respect manual setting if already present
+      if(root.hasAttribute('data-theme')) return;
+      if(enable){ root.setAttribute('data-theme','noel'); }
+    };
+
+    if('requestIdleCallback' in window){
+      requestIdleCallback(apply, {timeout: 500});
+    } else {
+      setTimeout(apply, 0);
+    }
+  }catch(e){ /* fail safe: do nothing */ }
 })();
