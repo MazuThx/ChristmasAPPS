@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portail ITSM – Accueil</title>
+  <meta name="description" content="Portail ITSM EasyVista : rechercher, demander de l’aide, créer une demande et suivre vos tickets." />
+  <link rel="preconnect" href="/" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
+  <header class="appbar" role="banner">
+    <div class="appbar__inner container" aria-label="Barre d'application">
+      <button class="icon-btn" type="button" aria-label="Ouvrir le menu">
+        <!-- Hamburger -->
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <rect x="3" y="6" width="18" height="2" rx="1"></rect>
+          <rect x="3" y="11" width="18" height="2" rx="1"></rect>
+          <rect x="3" y="16" width="18" height="2" rx="1"></rect>
+        </svg>
+        <span class="icon-btn__label">MENU</span>
+      </button>
+
+      <h1 class="logo" aria-label="EASYVISTA">EASYVISTA</h1>
+
+      <nav class="appbar__actions" aria-label="Actions principales">
+        <button class="icon-btn icon-btn--badge" type="button" aria-label="Notifications">
+          <!-- Bell -->
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 2a6 6 0 0 0-6 6v3.382a2 2 0 0 1-.586 1.414L4.5 13.71A1 1 0 0 0 5.207 15h13.586A1 1 0 0 0 19.5 13.71l-.914-.914A2 2 0 0 1 18 11.382V8a6 6 0 0 0-6-6Z"></path>
+            <path d="M9 18a3 3 0 0 0 6 0"></path>
+          </svg>
+        </button>
+
+        <button class="icon-btn" type="button" aria-label="Aide">
+          <!-- Help (circle with ?) -->
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.75 9a2.25 2.25 0 1 1 3.9 1.575c-.63.63-1.65 1.125-1.65 2.175v.25"></path>
+            <circle cx="12" cy="17" r="1"></circle>
+          </svg>
+        </button>
+
+        <button class="avatar-btn" type="button" aria-label="Profil utilisateur">
+          <!-- Avatar placeholder -->
+          <svg class="avatar" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <circle cx="16" cy="16" r="15"></circle>
+            <circle cx="16" cy="12" r="5"></circle>
+            <path d="M6 26c2.5-4 7-6 10-6s7.5 2 10 6"></path>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <section class="hero" aria-label="Accueil et recherche">
+      <!-- TODO: Remplacer l’URL du background image par l’image réelle -->
+      <div class="hero__bg" role="img" aria-label="Arrière-plan architectural pastel"></div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__content container">
+        <p class="hero__greeting" aria-live="polite">Bonjour Eddy</p>
+
+        <form class="search" role="search" aria-label="Recherche sur le portail">
+          <label class="visually-hidden" for="q">Rechercher</label>
+          <input id="q" class="search__input" type="search" name="q" placeholder="Rechercher" autocomplete="off" />
+          <button class="search__button" type="submit" aria-label="Rechercher">
+            <!-- Magnifier -->
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M16.5 16.5L21 21"></path>
+            </svg>
+          </button>
+        </form>
+
+        <section class="cards surface" aria-label="Accès rapides">
+          <div class="cards__grid">
+            <article class="card">
+              <div class="card__icon" aria-hidden="true">
+                <!-- Wrench / issue -->
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 7.5a5.5 5.5 0 0 1-7.53 5.1l-6.9 6.9a2 2 0 0 1-2.83-2.83l6.9-6.9A5.5 5.5 0 1 1 21 7.5Z"></path>
+                </svg>
+              </div>
+              <p class="card__text">Vous avez un problème avec vos services, vos matériels ou autre.</p>
+              <a class="card__cta" href="#" aria-label="Obtenir de l’aide">OBTENIR DE L’AIDE</a>
+            </article>
+
+            <article class="card">
+              <div class="card__icon" aria-hidden="true">
+                <!-- Plus in box -->
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                  <path d="M12 8v8M8 12h8"></path>
+                </svg>
+              </div>
+              <p class="card__text">Vous avez besoin d’un nouveau service, nouveau matériel ou autre.</p>
+              <a class="card__cta" href="#" aria-label="Effectuer une demande">EFFECTUER UNE DEMANDE</a>
+            </article>
+
+            <article class="card">
+              <div class="card__icon" aria-hidden="true">
+                <!-- Tickets / list -->
+                <svg viewBox="0 0 24 24">
+                  <rect x="4" y="5" width="16" height="14" rx="2"></rect>
+                  <path d="M8 9h8M8 13h8M8 17h5"></path>
+                </svg>
+              </div>
+              <p class="card__text">Vous souhaitez connaître l’avancée de vos demandes et résolutions d’incidents.</p>
+              <a class="card__cta" href="#" aria-label="Voir mes tickets">VOIR MES TICKETS</a>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <aside class="alert" role="note" aria-live="polite">
+      <div class="container alert__inner">
+        <span class="alert__icon" aria-hidden="true">
+          <!-- Warning dot -->
+          <svg viewBox="0 0 16 16">
+            <circle cx="8" cy="8" r="7"></circle>
+          </svg>
+        </span>
+        <p class="alert__text">Alerte : Formation obligatoire à la sensibilisation à la sécurité et au RGPD – à compléter avant la fin de ce mois</p>
+      </div>
+    </aside>
+  </main>
+
+  <a href="#chat" class="fab" aria-label="Ouvrir la messagerie de support">
+    <!-- Message icon -->
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M4 5h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"></path>
+    </svg>
+    <span class="fab__label">Chat</span>
+  </a>
+
+  <!-- Fallback anchor target for FAB -->
+  <div id="chat" class="visually-hidden" aria-hidden="true"></div>
+</body>
+</html>
